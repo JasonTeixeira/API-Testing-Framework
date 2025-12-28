@@ -1,0 +1,64 @@
+# Core Testing Framework
+pytest==7.4.3
+pytest-xdist==3.5.0  # Parallel execution
+pytest-rerunfailures==13.0  # Retry failed tests
+pytest-timeout==2.2.0  # Test timeouts
+pytest-html==4.1.1  # HTML reports
+pytest-asyncio==0.23.2  # Async test support
+
+# API Testing
+requests==2.31.0
+urllib3==2.1.0
+httpx==0.26.0  # Modern HTTP client with async support
+
+# FastAPI (for mock API)
+fastapi==0.109.0
+uvicorn==0.25.0  # ASGI server
+pydantic==2.5.3  # Data validation
+python-multipart==0.0.6  # Form data support
+
+# Authentication
+python-jose[cryptography]==3.3.0  # JWT tokens
+passlib[bcrypt]==1.7.4  # Password hashing
+python-dotenv==1.0.0  # Environment variables
+
+# Data Handling
+pyyaml==6.0.1  # Config files
+jsonschema==4.20.0  # JSON schema validation
+faker==22.0.0  # Test data generation
+
+# Database (for mock API)
+sqlalchemy==2.0.23
+databases==0.8.0
+aiosqlite==0.19.0
+
+# Reporting
+allure-pytest==2.13.2  # Allure reports
+pytest-metadata==3.0.0
+
+# Performance Testing
+locust==2.20.0  # Load testing
+pytest-benchmark==4.0.0  # Performance benchmarking
+
+# Utilities
+loguru==0.7.2  # Enhanced logging
+python-dateutil==2.8.2
+colorama==0.4.6  # Colored terminal output
+tabulate==0.9.0  # Pretty tables
+click==8.1.7  # CLI tool
+
+# Code Quality
+black==23.12.1  # Code formatting
+pylint==3.0.3  # Linting
+mypy==1.7.1  # Type checking
+pytest-cov==4.1.0  # Code coverage
+
+# Contract Testing
+pactman==2.33.0  # Consumer-driven contract testing
+
+# API Documentation
+httpie==3.2.2  # CLI HTTP client for testing
+
+# Monitoring
+psutil==5.9.7  # System monitoring
+requests-cache==1.1.1  # Response caching
