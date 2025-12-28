@@ -1,434 +1,265 @@
-# 🚀 Advanced API Testing Framework
+# API Testing Framework
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green.svg)](https://fastapi.tiangolo.com/)
 [![Pytest](https://img.shields.io/badge/pytest-7.4.3-yellow.svg)](https://pytest.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> **Enterprise-grade API testing framework demonstrating BOTH API development AND comprehensive testing skills**
+> A complete API testing solution - I built the API and the testing framework
 
-A production-ready project showcasing **full-stack QA capabilities**: building a FastAPI application from scratch AND implementing an advanced testing framework with authentication, retry logic, and comprehensive reporting.
-
----
-
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Architecture](#-architecture)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Running the API](#-running-the-api)
-- [Running Tests](#-running-tests)
-- [Project Structure](#-project-structure)
-- [API Documentation](#-api-documentation)
-- [Testing Strategies](#-testing-strategies)
-- [Skills Demonstrated](#-skills-demonstrated)
+This project demonstrates something I think is important for QA engineers: understanding both sides of the equation. I built a full FastAPI application AND a comprehensive testing framework to show how APIs work from the inside out.
 
 ---
 
-## 🎯 Overview
+## What's This Project?
 
-This project demonstrates **dual expertise**:
+This is two things in one:
 
-1. **API Development**: Complete FastAPI application with JWT authentication, CRUD operations, and production-grade features
-2. **API Testing**: Comprehensive testing framework with custom client, retry logic, and advanced test patterns
+**1. A Working API**
+A FastAPI application with user management, JWT authentication, and all the features you'd find in a real application. It's not just a mock - it actually works.
 
-**Perfect for QA roles** that value understanding both sides of the API testing equation!
+**2. A Testing Framework**
+A custom API testing client with smart retry logic, authentication handling, and performance monitoring. Built to test the API I created, but flexible enough to test any REST API.
 
----
-
-## ✨ Key Features
-
-### 🏗️ **FastAPI Application** (1,580+ lines)
-
-- ✅ **JWT Authentication** - Secure token-based auth with OAuth2
-- ✅ **User Management** - Full CRUD operations
-- ✅ **Pydantic Validation** - Schema validation with detailed errors
-- ✅ **SQLAlchemy ORM** - Database operations with migrations
-- ✅ **Rate Limiting** - Custom middleware (100 req/min)
-- ✅ **Request Timing** - Performance monitoring headers
-- ✅ **Error Handling** - Comprehensive exception handlers
-- ✅ **CORS & Security** - Production-ready middleware
-- ✅ **Auto Documentation** - OpenAPI/Swagger docs
-- ✅ **Structured Logging** - Detailed logs with Loguru
-
-### 🧪 **Testing Framework** (460+ lines)
-
-- ✅ **Custom API Client** - Intelligent HTTP wrapper
-- ✅ **Retry Logic** - Exponential backoff (3 retries)
-- ✅ **Auth Management** - Token handling & refresh
-- ✅ **Response Timing** - Performance assertions
-- ✅ **Pytest Fixtures** - Reusable test components
-- ✅ **Test Markers** - Categorized test execution
-- ✅ **Logging Integration** - Detailed request/response logs
-- ✅ **Context Managers** - Proper resource cleanup
+Why both? Because the best testers understand what they're testing. Building the API taught me what makes APIs fragile, how authentication really works, and where edge cases hide.
 
 ---
 
-## 🏛️ Architecture
+## Key Features
 
-```
-┌─────────────────────────────────────────────────────┐
-│                  TESTING LAYER                       │
-│  ┌───────────┐  ┌──────────────┐  ┌──────────────┐ │
-│  │ API Tests │  │ Integration  │  │ Performance  │ │
-│  └───────────┘  └──────────────┘  └──────────────┘ │
-└──────────────────────┬──────────────────────────────┘
-                       │
-┌──────────────────────┴──────────────────────────────┐
-│                FRAMEWORK LAYER                       │
-│  ┌──────────────┐  ┌─────────────┐  ┌────────────┐ │
-│  │  API Client  │  │  Validators │  │  Utilities │ │
-│  │  (400 lines) │  │             │  │            │ │
-│  └──────────────┘  └─────────────┘  └────────────┘ │
-└──────────────────────┬──────────────────────────────┘
-                       │
-┌──────────────────────┴──────────────────────────────┐
-│                   API LAYER                          │
-│  ┌────────────┐  ┌─────────────┐  ┌──────────────┐ │
-│  │   Routes   │  │    Auth     │  │   Database   │ │
-│  │ (460 lines)│  │ (300 lines) │  │ (350 lines)  │ │
-│  └────────────┘  └─────────────┘  └──────────────┘ │
-└──────────────────────┬──────────────────────────────┘
-                       │
-┌──────────────────────┴──────────────────────────────┐
-│                 DATABASE LAYER                       │
-│  ┌─────────────────────────────────────────────┐    │
-│  │  SQLite (Dev) / PostgreSQL (Prod)          │    │
-│  └─────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────┘
-```
+### The API Application
+
+- **JWT Authentication** - Real OAuth2 implementation with token refresh
+- **User Management** - Full CRUD operations (create, read, update, delete users)
+- **Request Validation** - Pydantic schemas catch bad requests before they hit the database
+- **Rate Limiting** - Prevents abuse with a simple middleware approach
+- **Performance Monitoring** - Every response includes timing headers
+- **Auto Documentation** - Swagger UI at `/docs` for interactive testing
+
+### The Testing Framework
+
+- **Smart API Client** - Handles authentication, retries, and logging automatically
+- **Retry Logic** - Exponential backoff when requests fail
+- **Token Management** - Automatically refreshes expired tokens
+- **Performance Assertions** - Test response times alongside functionality
+- **Flexible Fixtures** - Reusable pytest fixtures for common scenarios
 
 ---
 
-## 🔧 Prerequisites
+## Getting Started
 
-- **Python**: 3.8 or higher
-- **pip**: Latest version
-- **Virtual environment**: Recommended
+### Prerequisites
+
+- Python 3.8+
+- pip
+- That's it!
+
+### Installation
 
 ```bash
-# Verify Python
-python --version  # Should be 3.8+
-
-# Verify pip
-pip --version
-```
-
----
-
-## 📦 Installation
-
-### 1. Clone Repository
-
-```bash
+# Clone and setup
 git clone https://github.com/JasonTeixeira/API-Testing-Framework.git
 cd API-Testing-Framework
-```
 
-### 2. Create Virtual Environment
-
-```bash
-# Create venv
+# Virtual environment (recommended)
 python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Activate
-# macOS/Linux:
-source venv/bin/activate
-
-# Windows:
-venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-
-```bash
+# Install everything
 pip install -r requirements.txt
 ```
 
----
-
-## 🚀 Quick Start
-
-### Start the API Server
+### Start the API
 
 ```bash
-# Start FastAPI server
+# Run the FastAPI server
 python -m api_app.main
 
-# Server runs at: http://localhost:8000
-# API Docs at: http://localhost:8000/docs
+# API runs at: http://localhost:8000
+# Check out the docs: http://localhost:8000/docs
 ```
+
+The API automatically seeds some test users:
+- **admin** / Admin123! (superuser)
+- **testuser** / Test123! (regular user)
+- **john_doe** / John123! (regular user)
 
 ### Run Tests
 
 ```bash
-# Run all tests
+# Make sure the API is running first, then:
 pytest
 
-# Run with verbose output
+# Or with more detail:
 pytest -v
-
-# Run specific markers
-pytest -m smoke
-pytest -m auth
 ```
 
 ---
 
-## 🏃 Running the API
+## How It Works
 
-### Start Development Server
+### The API Architecture
 
-```bash
-python -m api_app.main
+```
+API Request → Middleware → Routes → Database
+                ↓
+         Authentication
+         Rate Limiting
+         Logging
 ```
 
-or
+I kept the architecture straightforward:
+- **Routes** handle incoming requests
+- **Auth layer** validates JWT tokens
+- **Database layer** manages SQLAlchemy operations
+- **Middleware** adds cross-cutting concerns (logging, rate limiting, etc.)
 
-```bash
-uvicorn api_app.main:app --reload --port 8000
-```
+### The Testing Client
 
-### Access Interactive Documentation
+The API client wraps Python's `requests` library with:
+- Automatic retry on failures (with exponential backoff)
+- Token management (login once, use everywhere)
+- Request/response logging (debug easily)
+- Performance tracking (every request is timed)
 
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI JSON**: http://localhost:8000/openapi.json
+Example usage:
 
-### Test Users (Auto-seeded)
+```python
+from framework.clients.api_client import APIClient
 
-| Username | Password | Role |
-|----------|----------|------|
-| admin | Admin123! | Superuser |
-| testuser | Test123! | Regular User |
-| john_doe | John123! | Regular User |
+# Create client and login
+client = APIClient(base_url="http://localhost:8000")
+client.login("testuser", "Test123!")
 
----
-
-## 🧪 Running Tests
-
-### Basic Test Execution
-
-```bash
-# All tests
-pytest
-
-# Verbose output
-pytest -v -s
-
-# Specific test file
-pytest tests/api/test_auth.py
-
-# Specific test
-pytest tests/api/test_auth.py::TestAuthentication::test_login_success
-```
-
-### Test Markers
-
-```bash
-# Smoke tests only
-pytest -m smoke
-
-# Authentication tests
-pytest -m auth
-
-# Integration tests
-pytest -m integration
-
-# Performance tests
-pytest -m performance
-```
-
-### Advanced Options
-
-```bash
-# With coverage
-pytest --cov=framework --cov-report=html
-
-# Parallel execution
-pytest -n auto
-
-# Stop on first failure
-pytest -x
-
-# Re-run failures
-pytest --lf
+# Make authenticated requests
+response = client.get("/api/v1/users/me")
+assert response.status_code == 200
 ```
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 API-Testing-Framework/
+├── api_app/                    # The FastAPI application
+│   ├── main.py                # App entry point
+│   ├── models/                # Database and Pydantic models
+│   ├── auth/                  # JWT and authentication
+│   ├── database/              # SQLAlchemy setup
+│   └── routes/                # API endpoints
 │
-├── api_app/                     # FastAPI Application (1,580+ lines)
-│   ├── main.py                 # App entry point (350 lines)
-│   ├── models/
-│   │   └── user.py             # User models (120 lines)
-│   ├── auth/
-│   │   └── security.py         # JWT & auth (300 lines)
-│   ├── database/
-│   │   └── database.py         # SQLAlchemy setup (350 lines)
-│   └── routes/
-│       ├── auth.py             # Auth endpoints (180 lines)
-│       └── users.py            # User CRUD (280 lines)
+├── framework/                  # The testing framework
+│   ├── clients/               # API client wrapper
+│   ├── utils/                 # Test utilities
+│   └── schemas/               # Response validators
 │
-├── framework/                   # Testing Framework (460+ lines)
-│   ├── clients/
-│   │   └── api_client.py       # API client (400 lines)
-│   ├── utils/                  # Test utilities
-│   └── schemas/                # Response schemas
+├── tests/                     # Test suites
+│   ├── api/                   # API endpoint tests
+│   ├── integration/           # Integration tests
+│   └── performance/           # Performance tests
 │
-├── tests/                       # Test Suites
-│   ├── api/
-│   │   └── test_auth.py        # Auth tests (60 lines)
-│   ├── integration/            # Integration tests
-│   └── performance/            # Performance tests
-│
-├── config/                      # Configuration files
-├── logs/                       # Application logs
-├── requirements.txt            # Dependencies (40+ packages)
-├── pytest.ini                  # Pytest configuration
-└── README.md                   # This file
-```
-
-**Total Lines of Code: 2,040+** 🎉
-
----
-
-## 📚 API Documentation
-
-### Authentication Endpoints
-
-```http
-POST /api/v1/auth/register
-POST /api/v1/auth/login
-POST /api/v1/auth/refresh
-POST /api/v1/auth/logout
-```
-
-### User Endpoints
-
-```http
-GET    /api/v1/users/
-GET    /api/v1/users/me
-GET    /api/v1/users/{id}
-GET    /api/v1/users/count
-PUT    /api/v1/users/me
-PUT    /api/v1/users/{id}
-DELETE /api/v1/users/{id}
-POST   /api/v1/users/{id}/activate
-POST   /api/v1/users/{id}/deactivate
-```
-
-### Example: Register User
-
-```bash
-curl -X POST "http://localhost:8000/api/v1/auth/register" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "newuser",
-    "email": "user@example.com",
-    "password": "SecurePass123!",
-    "full_name": "New User"
-  }'
-```
-
-### Example: Login
-
-```bash
-curl -X POST "http://localhost:8000/api/v1/auth/login" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=testuser&password=Test123!"
+├── config/                    # Configuration files
+└── requirements.txt           # Dependencies
 ```
 
 ---
 
-## 🎓 Testing Strategies
+## API Endpoints
 
-### 1. **Unit Testing**
-- Individual endpoint validation
-- Schema validation
-- Error handling
+### Authentication
+```
+POST /api/v1/auth/register     - Create new user
+POST /api/v1/auth/login        - Get JWT token
+POST /api/v1/auth/refresh      - Refresh expired token
+```
 
-### 2. **Integration Testing**
-- End-to-end user flows
-- Database interactions
-- Authentication flows
+### Users
+```
+GET    /api/v1/users/          - List all users
+GET    /api/v1/users/me        - Get current user
+GET    /api/v1/users/{id}      - Get specific user
+PUT    /api/v1/users/me        - Update your profile
+DELETE /api/v1/users/{id}      - Delete user (admin only)
+```
 
-### 3. **Performance Testing**
-- Response time assertions
-- Rate limit testing
-- Load testing with Locust
-
-### 4. **Security Testing**
-- Authentication bypass attempts
-- SQL injection prevention
-- XSS prevention
+Try them out at `http://localhost:8000/docs` - the Swagger UI is interactive!
 
 ---
 
-## 💡 Skills Demonstrated
+## Design Decisions
 
-### 🐍 **Python Mastery**
-- Advanced OOP patterns
-- Type hints throughout
-- Context managers
-- Decorators
-- Async/await
+### Why FastAPI?
 
-### 🔐 **Security**
-- JWT implementation
-- Password hashing (bcrypt)
-- OAuth2 flows
-- Rate limiting
-- CORS configuration
+It's fast, has great async support, and generates OpenAPI docs automatically. Plus, the dependency injection system makes testing easier.
 
-### 🗄️ **Database**
-- SQLAlchemy ORM
-- Database migrations
-- CRUD operations
-- Query optimization
+### Why Build the API Too?
 
-### ⚡ **FastAPI Expertise**
-- Dependency injection
-- Middleware creation
-- Exception handling
-- Background tasks
-- Lifespan events
+Testing something you built yourself teaches you:
+- What makes APIs break
+- How authentication flows really work
+- Where race conditions hide
+- Why rate limiting matters
 
-### 🧪 **Testing Excellence**
-- Custom test framework
-- Retry mechanisms
-- Fixture design
-- Parameterized tests
-- Performance assertions
+It's way more valuable than just testing someone else's API.
 
-### 📊 **DevOps Ready**
-- Docker support
-- CI/CD integration
-- Logging & monitoring
-- Configuration management
+### Why Custom Test Client?
+
+Most projects need API testing at some point. I wanted something that:
+- Handles authentication without repeated code
+- Retries intelligently (not just blindly)
+- Logs enough to debug issues fast
+- Works as both a library and standalone tool
 
 ---
 
-## 🤝 Contributing
+## What I Learned
 
-Contributions welcome! Please follow these steps:
+Building this taught me:
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
+**About APIs:**
+- JWT tokens are more complex than they seem
+- Rate limiting needs careful thought about edge cases
+- Good logging is critical for debugging production issues
+- Middleware order matters a lot
+
+**About Testing:**
+- Retry logic needs exponential backoff (not fixed delays)
+- Authentication state management is tricky to test
+- Performance tests need consistent environments
+- Good fixtures make tests way more maintainable
 
 ---
 
-## 👨‍💻 Author
+## Running in CI/CD
+
+Works with GitHub Actions, Jenkins, etc. Basic example:
+
+```yaml
+name: API Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - run: pip install -r requirements.txt
+      - run: python -m api_app.main &
+      - run: sleep 5  # Let API start
+      - run: pytest -v
+```
+
+---
+
+## Contributing
+
+Found a bug? Have an idea? Open an issue or PR. I'm always interested in better approaches!
+
+---
+
+## Author
 
 **Jason Teixeira**
 - GitHub: [@JasonTeixeira](https://github.com/JasonTeixeira)
@@ -436,39 +267,6 @@ Contributions welcome! Please follow these steps:
 
 ---
 
-## 🌟 Project Highlights
+## License
 
-- **2,040+ lines** of production code
-- **Full-stack approach**: Build AND test
-- **Production-ready** architecture
-- **Comprehensive documentation**
-- **Industry best practices**
-- **Interview-ready** demonstration
-
----
-
-## 📈 What Makes This Special
-
-### For QA Engineers:
-- Demonstrates deep understanding of APIs
-- Shows ability to build, not just test
-- Advanced testing patterns
-- Production-grade code quality
-
-### For Hiring Managers:
-- Complete, working application
-- Well-documented and maintainable
-- Demonstrates senior-level skills
-- Ready for immediate review
-
----
-
-<div align="center">
-
-### ⭐ Star this repository if you find it helpful!
-
-**[Report Bug](https://github.com/JasonTeixeira/API-Testing-Framework/issues)** · **[Request Feature](https://github.com/JasonTeixeira/API-Testing-Framework/issues)**
-
-Made with ❤️ by Jason Teixeira
-
-</div>
+MIT License - use it however you want.
