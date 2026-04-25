@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov flake8
+
+      - name: Lint
+        run: flake8 framework/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      - name: Start test API server
+        run: |
+          cd api_app && python -m uvicorn main:app --host 0.0.0.0 --port 8000 &
+          sleep 3
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short -x
